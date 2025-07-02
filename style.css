@@ -3,21 +3,231 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #222;
+    background-color: #111;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    transition: background-color 0.6s ease-in-out;
 }
 
-.clock {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border: 8px solid #fff;
-    border-radius: 50%;
+body.light-mode {
+    background-color: #eee;
+}
+
+body.light-theme .clock {
+    border-color: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: 
+        0 0 50px rgba(0, 0, 0, 0.1),
+        inset 0 0 50px rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .hour-number {
+    color: rgba(0, 0, 0, 0.7);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .minute-marks::before {
+    background: repeating-conic-gradient(from 0deg, 
+        rgba(0, 0, 0, 0.5) 0deg, rgba(0, 0, 0, 0.5) 1deg,
+        transparent 1deg, transparent 30deg
+    );
+}
+
+body.light-theme .minute-marks::after {
+    background: repeating-conic-gradient(from 0deg,
+        rgba(0, 0, 0, 0.2) 0deg, rgba(0, 0, 0, 0.2) 1deg,
+        transparent 1deg, transparent 6deg
+    );
+}
+
+body.light-theme .hand {
     background: #333;
-    box-shadow: 0 0 30px rgba(0, 0, 0, .8);
 }
 
-.noshow {
-    display: none;
+body.light-theme .minute {
+    background: #555;
+}
+
+body.light-theme .second {
+    background: #d63031;
+}
+
+body.light-theme .center {
+    background: #333;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+}
+
+body.light-theme .btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+body.light-theme .btn.active {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.controls {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn.active {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.btn.clicked {
+    animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.clock.numbers-hidden .hour-number {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5) !important;
+    pointer-events: none;
+}
+
+.hour-number {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    pointer-events: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, color 0.6s ease-in-out, text-shadow 0.6s ease-in-out;
+}
+
+.hour-number[data-hour="12"] {
+    transform: translate(-50%, -50%) translateY(-140px);
+}
+
+.hour-number[data-hour="1"] {
+    transform: translate(-50%, -50%) rotate(30deg) translateY(-140px) rotate(-30deg);
+}
+
+.hour-number[data-hour="2"] {
+    transform: translate(-50%, -50%) rotate(60deg) translateY(-140px) rotate(-60deg);
+}
+
+.hour-number[data-hour="3"] {
+    transform: translate(-50%, -50%) translateX(140px);
+}
+
+.hour-number[data-hour="4"] {
+    transform: translate(-50%, -50%) rotate(120deg) translateY(-140px) rotate(-120deg);
+}
+
+.hour-number[data-hour="5"] {
+    transform: translate(-50%, -50%) rotate(150deg) translateY(-140px) rotate(-150deg);
+}
+
+.hour-number[data-hour="6"] {
+    transform: translate(-50%, -50%) translateY(140px);
+}
+
+.hour-number[data-hour="7"] {
+    transform: translate(-50%, -50%) rotate(210deg) translateY(-140px) rotate(-210deg);
+}
+
+.hour-number[data-hour="8"] {
+    transform: translate(-50%, -50%) rotate(240deg) translateY(-140px) rotate(-240deg);
+}
+
+.hour-number[data-hour="9"] {
+    transform: translate(-50%, -50%) translateX(-140px);
+}
+
+.hour-number[data-hour="10"] {
+    transform: translate(-50%, -50%) rotate(300deg) translateY(-140px) rotate(-300deg);
+}
+
+.hour-number[data-hour="11"] {
+    transform: translate(-50%, -50%) rotate(330deg) translateY(-140px) rotate(-330deg);
+}
+
+.minute-marks {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}
+
+.minute-marks::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-conic-gradient(from 0deg, 
+        rgba(255, 255, 255, 0.8) 0deg, rgba(255, 255, 255, 0.8) 1deg,
+        transparent 1deg, transparent 30deg
+    );
+    border-radius: 50%;
+    mask: radial-gradient(circle, transparent 70%, black 70%, black 72%, transparent 72%);
+    opacity: 1;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.minute-marks::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        rgba(255, 255, 255, 0.3) 0deg,
+        rgba(255, 255, 255, 0.3) 1deg,
+        transparent 1deg,
+        transparent 6deg
+    );
+    border-radius: 50%;
+    mask: radial-gradient(circle, transparent 70%, black 70%, black 73%, transparent 73%);
+    opacity: 1;
+    transition: opacity 0.6s ease-in-out;
 }
 
 .hand {
@@ -27,13 +237,15 @@ body {
     transform-origin: bottom center;
     background: #fff;
     border-radius: 6px;
+    transition: background-color 0.6s ease-in-out;
 }
 
 .hour {
     width: 10px;
     height: 70px;
     background: #fff;
-    z-index: 3;
+    z-index: 1;
+    transition: all 0.6s ease-in-out;
 }
 
 .minute {
@@ -41,24 +253,148 @@ body {
     height: 100px;
     background: #eee;
     z-index: 2;
+    transition: all 0.6s ease-in-out;
 }
 
 .second {
     width: 2px;
     height: 120px;
     background: #e74c3c;
-    z-index: 1;
+    z-index: 3;
+    transition: transform 1s linear, background-color 0.6s ease-in-out;
+}
+
+.wiggling .second {
+    transition: transform 0.2s cubic-bezier(0.1, 2.7, 0.58, 1);
 }
 
 .center {
     position: absolute;
     width: 20px;
     height: 20px;
-    background: #fff;
+    background-color: #fff;
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    transition: background-color 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+}
+
+.clock {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    border: 12px solid rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 0 50px rgba(0, 0, 0, 0.3),
+        inset 0 0 50px rgba(255, 255, 255, 0.05);
+    transition: border-color 0.6s ease-in-out, background-color 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+}
+
+.noshow {
+    display: none;
+}
+
+/* Light Mode */
+body.light-mode {
+    background-color: #f0f0f0;
+}
+
+.light-mode .clock {
+    border-color: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: 
+        0 0 50px rgba(0, 0, 0, 0.1),
+        inset 0 0 50px rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .hour-number {
+    color: rgba(0, 0, 0, 0.8);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .minute-marks::before {
+    opacity: 0;
+}
+
+.light-mode .minute-marks::after {
+    opacity: 0;
+}
+
+.minute-marks-light {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.minute-marks-light::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-conic-gradient(from 0deg, 
+        rgba(0, 0, 0, 0.5) 0deg, rgba(0, 0, 0, 0.5) 1deg,
+        transparent 1deg, transparent 30deg
+    );
+    border-radius: 50%;
+    mask: radial-gradient(circle, transparent 70%, black 70%, black 72%, transparent 72%);
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.minute-marks-light::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        rgba(0, 0, 0, 0.2) 0deg,
+        rgba(0, 0, 0, 0.2) 1deg,
+        transparent 1deg,
+        transparent 6deg
+    );
+    border-radius: 50%;
+    mask: radial-gradient(circle, transparent 70%, black 70%, black 73%, transparent 73%);
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.light-mode .minute-marks-light::before,
+.light-mode .minute-marks-light::after {
+    opacity: 1;
+}
+
+.light-mode .hand {
+    background: #333;
+}
+
+.light-mode .second {
+    background: #e74c3c;
+}
+
+.light-mode .center {
+    background: #333;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.light-mode .btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .btn.active {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
