@@ -1,6 +1,8 @@
 let lastSec = -1;
 let secondRotation = 0;
 
+let numberDisplayMode = 'arabic';
+
 function updateClock() {
     const now = new Date();
     const sec = now.getSeconds();
@@ -25,12 +27,27 @@ function updateClock() {
     lastSec = sec;
 }
 
+function updateNumbersButton() {
+    const toggleNumbersBtn = document.getElementById('toggle-numbers');
+    switch(numberDisplayMode) {
+        case 'arabic':
+            toggleNumbersBtn.textContent = 'Arabic';
+            break;
+        case 'roman':
+            toggleNumbersBtn.textContent = 'Roman';
+            break;
+        case 'hidden':
+            toggleNumbersBtn.textContent = 'No Numbers';
+            break;
+    }
+}
+
 function saveSettings() {
     const clock = document.getElementById('clock');
     const body = document.body;
     
     const settings = {
-        numbersHidden: clock.classList.contains('numbers-hidden'),
+        numberDisplayMode: numberDisplayMode,
         tickTock: clock.classList.contains('wiggling'),
         lightMode: body.classList.contains('light-mode')
     };
@@ -49,12 +66,24 @@ function loadSettings() {
     const toggleTickBtn = document.getElementById('toggle-tick');
     const toggleLightModeBtn = document.getElementById('toggle-light-mode');
     
-    if (settings.numbersHidden) {
+    if (settings.numberDisplayMode) {
+        numberDisplayMode = settings.numberDisplayMode;
+        switch(numberDisplayMode) {
+            case 'arabic':
+                clock.classList.remove('roman-mode', 'numbers-hidden');
+                break;
+            case 'roman':
+                clock.classList.add('roman-mode');
+                clock.classList.remove('numbers-hidden');
+                break;
+            case 'hidden':
+                clock.classList.add('numbers-hidden');
+                clock.classList.remove('roman-mode');
+                break;
+        }
+    } else if (settings.numbersHidden) {
+        numberDisplayMode = 'hidden';
         clock.classList.add('numbers-hidden');
-        toggleNumbersBtn.classList.remove('active');
-    } else {
-        clock.classList.remove('numbers-hidden');
-        toggleNumbersBtn.classList.add('active');
     }
     
     if (settings.tickTock) {
@@ -86,9 +115,33 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSettings();
 
     toggleNumbersBtn.addEventListener('click', () => {
-        clock.classList.toggle('numbers-hidden');
-        toggleNumbersBtn.classList.toggle('active');
-        saveSettings();
+        const clock = document.getElementById('clock');
+        
+        switch(numberDisplayMode) {
+            case 'arabic':
+                clock.classList.add('numbers-hidden');
+                
+                setTimeout(() => {
+                    clock.classList.remove('numbers-hidden');
+                    clock.classList.add('roman-mode');
+                    numberDisplayMode = 'roman';
+                    saveSettings();
+                }, 500);
+                break;
+                
+            case 'roman':
+                numberDisplayMode = 'hidden';
+                clock.classList.add('numbers-hidden');
+                clock.classList.remove('roman-mode');
+                saveSettings();
+                break;
+                
+            case 'hidden':
+                numberDisplayMode = 'arabic';
+                clock.classList.remove('numbers-hidden', 'roman-mode');
+                saveSettings();
+                break;
+        }
     });
 
     toggleTickBtn.addEventListener('click', () => {

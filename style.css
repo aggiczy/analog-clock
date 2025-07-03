@@ -300,7 +300,6 @@ body.light-theme .btn.active {
     display: none;
 }
 
-/* Light Mode */
 body.light-mode {
     background-color: #f0f0f0;
 }
@@ -397,4 +396,73 @@ body.light-mode {
 .light-mode .btn.active {
     background: rgba(0, 0, 0, 0.2);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.hour-number.roman {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    pointer-events: none;
+}
+
+.clock.roman-mode .hour-number.arabic {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5) !important;
+    pointer-events: none;
+}
+
+.clock.roman-mode .hour-number.roman {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(-140px);
+    pointer-events: none;
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="1"] {
+    transform: translate(-50%, -50%) rotate(30deg) translateY(-140px) rotate(-30deg);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="2"] {
+    transform: translate(-50%, -50%) rotate(60deg) translateY(-140px) rotate(-60deg);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="3"] {
+    transform: translate(-50%, -50%) translateX(140px);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="4"] {
+    transform: translate(-50%, -50%) rotate(120deg) translateY(-140px) rotate(-120deg);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="5"] {
+    transform: translate(-50%, -50%) rotate(150deg) translateY(-140px) rotate(-150deg);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="6"] {
+    transform: translate(-50%, -50%) translateY(140px);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="7"] {
+    transform: translate(-50%, -50%) rotate(210deg) translateY(-140px) rotate(-210deg);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="8"] {
+    transform: translate(-50%, -50%) rotate(240deg) translateY(-140px) rotate(-240deg);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="9"] {
+    transform: translate(-50%, -50%) translateX(-140px);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="10"] {
+    transform: translate(-50%, -50%) rotate(300deg) translateY(-140px) rotate(-300deg);
+}
+
+.clock.roman-mode .hour-number.roman[data-hour="11"] {
+    transform: translate(-50%, -50%) rotate(330deg) translateY(-140px) rotate(-330deg);
+}
+
+.clock.numbers-hidden .hour-number.arabic,
+.clock.numbers-hidden .hour-number.roman {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5) !important;
+    pointer-events: none;
 }
