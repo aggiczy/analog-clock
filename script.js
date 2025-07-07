@@ -52,12 +52,14 @@ async function processAnimationQueue() {
 
 function updateClock() {
     const now = new Date();
+
+    now.setSeconds(now.getSeconds() + 1);
     
     const actualSec = now.getSeconds();
     const actualMin = now.getMinutes();
     const actualHr = now.getHours();
     
-    now.setSeconds(now.getSeconds() + 2);
+    now.setSeconds(now.getSeconds() + 1);
     
     const sec = now.getSeconds();
     const min = now.getMinutes();
