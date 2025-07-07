@@ -12,7 +12,24 @@
 </head>
 <body>
     <div class="controls">
-        <button class="btn active" id="toggle-numbers">Numbers</button>
+        <div class="dropdown">
+            <button class="btn" id="toggle-numbers">Numbers</button>
+            <div class="dropdown-content">
+                <a href="#" data-mode="0">Arabic</a>
+                <a href="#" data-mode="1">Roman</a>
+                <a href="#" data-mode="2">None</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn" id="toggle-orbits">Orbits</button>
+            <div class="dropdown-content">
+                <a href="#" data-mode="0">Arabic inside</a>
+                <a href="#" data-mode="1">Roman inside</a>
+                <a href="#" data-mode="2">Arabic outside</a>
+                <a href="#" data-mode="3">Roman outside</a>
+                <a href="#" data-mode="4">None</a>
+            </div>
+        </div>
         <button class="btn" id="toggle-tick">Tick-Tock</button>
         <button class="btn" id="toggle-light-mode">Light Mode</button>
     </div>
@@ -51,6 +68,9 @@
         <div class="hand minute" id="minute"></div>
         <div class="hand second" id="second"></div>
         <div class="center"></div>
+        <div class="dynamic-number hour-dynamic" id="dynamic-hour"></div>
+        <div class="dynamic-number minute-dynamic" id="dynamic-minute"></div>
+        <div class="dynamic-number second-dynamic" id="dynamic-second"></div>
     </div>
     <script src="script.js"></script>
 </body>
