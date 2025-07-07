@@ -276,16 +276,14 @@ async function applyEntranceAnimation(dynamicNumbers) {
 }
 
 async function changeOrbitNumberMode(newMode) {
-    if (currentMode === newMode) return;
+    if (orbitDisplayMode === newMode) return;
     
     const dynamicHour = document.getElementById('dynamic-hour');
     const dynamicMinute = document.getElementById('dynamic-minute');
     const dynamicSecond = document.getElementById('dynamic-second');
     const dynamicNumbers = [dynamicHour, dynamicMinute, dynamicSecond];
     
-    const currentMode = orbitDisplayMode;
-    
-    const isCurrentNone = currentMode === 4;
+    const isCurrentNone = orbitDisplayMode === 4;
     
     const isNewNone = newMode === 4;
     
