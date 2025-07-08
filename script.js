@@ -59,8 +59,6 @@ function updateClock() {
     const actualMin = now.getMinutes();
     const actualHr = now.getHours();
     
-    now.setSeconds(now.getSeconds() + 1);
-    
     const sec = now.getSeconds();
     const min = now.getMinutes();
     const hr = now.getHours();
