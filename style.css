@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@700&display=swap');
+@font-face {
+    font-family: nasalization;
+    src: url('./fonts/nasalization-rg.otf');
+    font-display: swap;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -75,6 +82,16 @@ body.light-theme .btn.active {
     display: flex;
     gap: 15px;
     z-index: 100;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.controls.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-20px);
+    pointer-events: none;
 }
 
 .btn {
@@ -353,6 +370,7 @@ body.light-theme .btn.active {
         0 0 50px rgba(0, 0, 0, 0.3),
         inset 0 0 50px rgba(255, 255, 255, 0.05);
     transition: border-color 0.6s ease-in-out, background-color 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+    cursor: pointer;
 }
 
 .noshow {
@@ -689,4 +707,91 @@ body.light-mode {
 /* Orbit Display Modes */
 .clock.no-orbit-numbers .dynamic-number {
     opacity: 0 !important;
+}
+
+/* CSS Custom Properties for Brand Colors */
+:root {
+    --blurple: #5865f2;
+    --footer_color: #aaa;
+}
+.light-mode {
+    --footer_color: #555;
+}
+
+/* Footer Styling */
+.footer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    font-family: 'Jura', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 18px;
+    opacity: 1;
+    visibility: visible;
+    transition: color 0.6s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.footer.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(20px);
+    pointer-events: none;
+}
+
+.light-mode .footer {
+    color: #000;
+}
+
+.footer p {
+    margin: 0;
+    text-align: center;
+}
+
+/* Brand Element Styling */
+.brand {
+    font-weight: bold;
+    font-size: 90%;
+    letter-spacing: -.1px;
+    font-family: nasalization, 'Orbitron', 'Courier New', monospace;
+    transition: all .3s ease-in-out color 0.6s ease-in-out;
+}
+.brand::before,
+.brand::after {
+    transition: color 0.6s ease-in-out;
+}
+
+clockdot::before {
+    content: 'clock';
+    color: wheat;
+}
+.light-mode clockdot::before {
+    color: #ebbd68;
+}
+
+clockdot::after {
+    content: '.';
+    color: var(--footer_color);
+}
+
+aggiczyhu::before {
+    content: 'aggiczy';
+    color: var(--blurple);
+}
+
+aggiczyhu::after {
+    content: '.hu';
+    color: var(--footer_color);
+}
+
+ataggiczy::before {
+    content: '@';
+    color: var(--footer_color);
+}
+
+ataggiczy::after {
+    content: 'aggiczy';
+    color: var(--blurple);
 }

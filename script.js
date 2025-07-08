@@ -7,6 +7,7 @@ let hourRotation = 0;
 
 let numberDisplayMode = 0;
 let orbitDisplayMode = 0;
+let controlsVisible = true;
 
 let animationQueue = [];
 let isAnimating = false;
@@ -178,7 +179,8 @@ function saveSettings() {
         numberDisplayMode: numberDisplayMode,
         orbitDisplayMode: orbitDisplayMode,
         tickTock: clock.classList.contains('wiggling'),
-        lightMode: body.classList.contains('light-mode')
+        lightMode: body.classList.contains('light-mode'),
+        controlsVisible: controlsVisible
     };
     
     localStorage.setItem('clockSettings', JSON.stringify(settings));
@@ -220,6 +222,35 @@ function loadSettings() {
         toggleLightModeBtn.classList.remove('active');
         toggleLightModeBtn.textContent = 'Light Mode';
     }
+    
+    if (settings.controlsVisible !== undefined) {
+        controlsVisible = settings.controlsVisible;
+        const controls = document.querySelector('.controls');
+        const footer = document.querySelector('.footer');
+        if (!controlsVisible) {
+            controls.classList.add('hidden');
+            footer.classList.add('hidden');
+        } else {
+            controls.classList.remove('hidden');
+            footer.classList.remove('hidden');
+        }
+    }
+}
+
+function toggleControls() {
+    const controls = document.querySelector('.controls');
+    const footer = document.querySelector('.footer');
+    controlsVisible = !controlsVisible;
+    
+    if (controlsVisible) {
+        controls.classList.remove('hidden');
+        footer.classList.remove('hidden');
+    } else {
+        controls.classList.add('hidden');
+        footer.classList.add('hidden');
+    }
+    
+    saveSettings();
 }
 
 async function changeStaticNumberMode(newMode) {
@@ -307,6 +338,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
 
     loadSettings();
+    
+    // Add click event listener to clock to toggle controls
+    clock.addEventListener('click', (e) => {
+        // Prevent event if user clicked on a control element
+        if (!e.target.closest('.controls')) {
+            toggleControls();
+        }
+    });
     
     document.querySelectorAll('#toggle-numbers + .dropdown-content a').forEach(item => {
         item.addEventListener('click', (e) => {
