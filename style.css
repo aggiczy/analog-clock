@@ -565,14 +565,17 @@ body.light-mode {
 .hour-dynamic {
     font-weight: bold;
     color: white;
+    z-index: 4;
 }
 
 .minute-dynamic {
     color: white;
+    z-index: 5;
 }
 
 .second-dynamic {
     color: #e74c3c;
+    z-index: 6;
 }
 
 .light-mode .hour-dynamic,

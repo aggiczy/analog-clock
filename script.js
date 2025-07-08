@@ -70,7 +70,7 @@ function updateClock() {
         minuteRotation += 360;
     }
     
-    if (lastHr === 23 && hr === 0) {
+    if ((lastHr === 11 && hr === 12) || (lastHr === 23 && hr === 0)) {
         hourRotation += 360;
     }
     
