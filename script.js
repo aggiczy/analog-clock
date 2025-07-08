@@ -52,8 +52,6 @@ async function processAnimationQueue() {
 
 function updateClock() {
     const now = new Date();
-
-    now.setSeconds(now.getSeconds() + 1);
     
     const actualSec = now.getSeconds();
     const actualMin = now.getMinutes();
@@ -357,5 +355,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateClock();
-    setInterval(updateClock, 1000);
+    setInterval(updateClock, 10);
 });
