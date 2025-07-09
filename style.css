@@ -14,7 +14,7 @@ body {
     font-family: 'Orbitron', sans-serif;
     margin: 0;
     transition: background-color 0.6s ease-in-out;
-    overflow: hidden; /* Ensure no scrollbars appear during animations */
+    overflow: hidden;
 }
 
 body.light-mode {
@@ -134,7 +134,6 @@ body.light-theme .btn.active {
     100% { transform: scale(1); }
 }
 
-/* Dropdown Menu */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -583,7 +582,6 @@ body.light-mode {
     color: black;
 }
 
-/* Inside orbit animations */
 .dynamic-number.anim-inside-exit {
     transform: translate(-50%, -50%) scale(0.1) !important;
     opacity: 0;
@@ -607,7 +605,6 @@ body.light-mode {
     }
 }
 
-/* Outside orbit animations */
 .dynamic-number.anim-outside-enter {
     opacity: 1;
     animation: fadeInFromEdge 0.5s ease-in-out;
@@ -623,13 +620,11 @@ body.light-mode {
     }
 }
 
-/* Generic animations */
 .dynamic-number.anim-in {
     opacity: 1;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
-/* Static Numbers Display Modes */
 .clock.arabic-static .hour-number.arabic {
     opacity: 1;
     pointer-events: all;
@@ -707,12 +702,10 @@ body.light-mode {
     pointer-events: none;
 }
 
-/* Orbit Display Modes */
 .clock.no-orbit-numbers .dynamic-number {
     opacity: 0 !important;
 }
 
-/* CSS Custom Properties for Brand Colors */
 :root {
     --blurple: #5865f2;
     --footer_color: #aaa;
@@ -721,7 +714,6 @@ body.light-mode {
     --footer_color: #555;
 }
 
-/* Footer Styling */
 .footer {
     position: fixed;
     bottom: 20px;
@@ -753,7 +745,6 @@ body.light-mode {
     text-align: center;
 }
 
-/* Brand Element Styling */
 .brand {
     font-weight: bold;
     font-size: 90%;

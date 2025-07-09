@@ -54,10 +54,6 @@ async function processAnimationQueue() {
 function updateClock() {
     const now = new Date();
     
-    const actualSec = now.getSeconds();
-    const actualMin = now.getMinutes();
-    const actualHr = now.getHours();
-    
     const sec = now.getSeconds();
     const min = now.getMinutes();
     const hr = now.getHours();
@@ -102,11 +98,11 @@ function updateClock() {
     const formatTwoDigits = (num) => num.toString().padStart(2, '0');
 
     const clock = document.getElementById('clock');
-    const isWiggling = clock.classList.contains('wiggling');
+    //const isWiggling = clock.classList.contains('wiggling');
     
-    const displayHr = isWiggling ? hr : actualHr;
-    const displayMin = isWiggling ? min : actualMin;
-    const displaySec = isWiggling ? sec : actualSec;
+    const displayHr = hr;
+    const displayMin = min;
+    const displaySec = sec;
 
     if (orbitDisplayMode === 1 || orbitDisplayMode === 3) {
         dynamicHour.textContent = toRoman(displayHr % 12 === 0 ? 12 : displayHr % 12);
@@ -339,9 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadSettings();
     
-    // Add click event listener to clock to toggle controls
     clock.addEventListener('click', (e) => {
-        // Prevent event if user clicked on a control element
         if (!e.target.closest('.controls')) {
             toggleControls();
         }
